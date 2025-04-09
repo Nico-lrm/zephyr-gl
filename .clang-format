@@ -1,0 +1,45 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 120
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+NamespaceIndentation: All
+AlignEscapedNewlines: Left
+
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowAllConstructorInitializersOnNextLine: true
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+Cpp11BracedListStyle: false
+
+AccessModifierOffset: -2
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeSquareBrackets: false
+SpaceBeforeCaseColon: false
+SpaceBeforeRangeBasedForLoopColon: false
+SpaceBeforeParens: Never  # Supprime l'espace entre if/for/while et la parenthèse
+SpacesInConditionalStatement: false  # Supprime les espaces dans les expressions conditionnelles
+SpaceAfterTemplateKeyword: false
+SortIncludes: CaseSensitive
+BreakTemplateDeclarations: Yes
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+  IndentBraces: false
+  # Configurations pour accolades vides
+  SplitEmptyFunction: false    # Ne pas séparer les accolades vides pour les fonctions
+  SplitEmptyRecord: false      # Ne pas séparer les accolades vides pour les classes/structs
+  SplitEmptyNamespace: false   # Ne pas séparer les accolades vides pour les namespaces
+
+IncludeBlocks: Regroup
+MaxEmptyLinesToKeep: 1
