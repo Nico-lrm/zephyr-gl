@@ -22,7 +22,7 @@ SpaceBeforeParens: Never  # Supprime l'espace entre if/for/while et la parenthè
 SpacesInConditionalStatement: false  # Supprime les espaces dans les expressions conditionnelles
 SpaceAfterTemplateKeyword: false
 SortIncludes: CaseSensitive
-BreakTemplateDeclarations: Yes
+#BreakTemplateDeclarations: Yes
 
 BreakBeforeBraces: Custom
 BraceWrapping:
