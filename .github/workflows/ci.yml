@@ -46,7 +46,4 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y cppcheck
       - name: Analyse
         run: |
-          cppcheck --enable=all --inconclusive --std=c++20 --force \
-                   --suppress=missingIncludeSystem \
-                   --quiet \
-                   src
+          cppcheck --enable=all --inconclusive --error-exitcode=1 --std=c++20 --force --suppress=missingIncludeSystem --quiet src
