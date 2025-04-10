@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches-ignore: [ "main" ]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: sudo apt-get update && sudo apt-get install -y build-essential libglew-dev libglfw3-dev
+      - name: Build du projet
+        run: mkdir build && cd build && cmake ../cmake && make
+  leaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Vérification des leaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  lint:
+    name: Linting du code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: sudo apt-get update && sudo apt-get install -y clang
+      - name: Check format code
+        run: |
+          find . -name '*.cpp' -o -name '*.h' | xargs clang-format --dry-run --Werror
+  static-analysis:
+    name: Analyse statique du code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: sudo apt-get update && sudo apt-get install -y cppcheck
+      - name: Analyse
+        run: |
+          cppcheck --enable=all --inconclusive --std=c++20 --force \
+                   --suppress=missingIncludeSystem \
+                   --quiet \
+                   src
