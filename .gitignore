@@ -31,6 +31,11 @@
 *.out
 *.app
 
+#
 cmake/cmake-build-*
 build/
 /.idea/
+
+# Commitlint files
+/node_modules
+package-lock.json
