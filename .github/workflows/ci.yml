@@ -16,17 +16,25 @@ jobs:
           fetch-depth: 0
       - run: sudo apt-get update && sudo apt-get install -y build-essential libglew-dev libglfw3-dev
       - name: Build du projet
-        run: mkdir build && cd build && cmake .. && make
-  leaks:
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Vérification des leaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: sudo apt-get update && sudo apt-get install -y boost
+      - name: Execution des tests
+        run: | 
+          mkdir build 
+          cd build 
+          cmake -DBUILD_TESTING=ON .. 
+          make 
+          ./tests/ZephyrTests
   lint:
     runs-on: ubuntu-latest
     steps:

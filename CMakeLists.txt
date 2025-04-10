@@ -53,7 +53,7 @@ endif()
 target_link_libraries(ZephyrGL ${LIBS})
 
 # Test build
-option(BUILD_TESTING "Enable testing" ON)
+option(BUILD_TESTING "Enable testing" OFF)
 if (BUILD_TESTING)
     enable_testing()
     add_subdirectory("tests")
