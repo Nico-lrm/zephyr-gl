@@ -28,7 +28,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint:
-    name: Linting du code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +38,6 @@ jobs:
         run: |
           find . -name '*.cpp' -o -name '*.h' | xargs clang-format --dry-run --Werror
   static-analysis:
-    name: Analyse statique du code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
