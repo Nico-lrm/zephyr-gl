@@ -51,11 +51,3 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 target_link_libraries(ZephyrGL ${LIBS})
-
-# Shaders
-file(GLOB_RECURSE SHADER_SOURCES
-        "../assets/shaders/*.vert"
-        "../assets/shaders/*.frag"
-        "../assets/shaders/*.geom"
-        "../assets/shaders/*.comp"
-)
