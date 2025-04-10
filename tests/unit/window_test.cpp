@@ -1,22 +1,24 @@
 #define BOOST_TEST_MODULE ZephyrTests
 #include "../../src/domain/Window.h"
+
 #include <boost/test/unit_test.hpp>
 
 using namespace zephyr;
 
-struct FakeWindow {
+struct FakeWindow
+{
     bool process_called = false;
     bool close = false;
 
     void process_events() { process_called = true; }
     [[nodiscard]] bool should_close() const { return close; }
     [[nodiscard]] const void* get_handle() const { return reinterpret_cast<void*>(0x1234); }
-    [[nodiscard]] Extent2D get_window_extent() const { return {1280, 720}; }
+    [[nodiscard]] Extent2D get_window_extent() const { return { 1280, 720 }; }
 };
 
 BOOST_AUTO_TEST_CASE(WindowDelegatesCorrectly)
 {
-    auto fake = std::make_shared<FakeWindow>();
+    const auto fake = std::make_shared<FakeWindow>();
     Window window(fake);
 
     window.process_events();
