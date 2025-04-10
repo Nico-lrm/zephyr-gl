@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Types.h"
+
 #include <concepts>
 #include <memory>
-
-#include "Types.h"
 
 namespace zephyr
 {
@@ -42,8 +42,7 @@ namespace zephyr
             [[nodiscard]] virtual Extent2D get_window_extent() const = 0;
         };
 
-        template<typename T>
-        struct ConcreteWindow final : IWindow
+        template<typename T> struct ConcreteWindow final : IWindow
         {
             explicit ConcreteWindow(std::shared_ptr<T> obj_ptr) noexcept : object_ptr_(obj_ptr) {}
             void process_events() override { this->object_ptr_->process_events(); };
