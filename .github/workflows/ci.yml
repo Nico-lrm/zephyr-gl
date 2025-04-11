@@ -32,9 +32,9 @@ jobs:
         run: | 
           mkdir build 
           cd build 
-          cmake -DBUILD_TESTING=ON ../tests
+          cmake ../tests
           make 
-          ./tests/ZephyrTests
+          ctest --output-on-failure
   lint:
     runs-on: ubuntu-latest
     steps:
