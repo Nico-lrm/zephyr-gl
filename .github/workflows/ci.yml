@@ -34,6 +34,7 @@ jobs:
           cd build 
           cmake ../tests
           make 
+          ls -al
           ctest --output-on-failure
   lint:
     runs-on: ubuntu-latest
