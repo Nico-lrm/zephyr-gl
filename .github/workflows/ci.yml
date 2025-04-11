@@ -35,7 +35,7 @@ jobs:
           cmake ../tests
           make 
           cd tests
-          ctest --output-on-failure
+          ./ZephyrTests
   lint:
     runs-on: ubuntu-latest
     steps:
