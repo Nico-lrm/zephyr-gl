@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.30)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../../build")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "build")
 project(ZephyrGL LANGUAGES CXX VERSION 0.1.0)
 
 # Disable console on Windows
@@ -35,7 +35,7 @@ find_package(GLEW REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
 # Variables
-file(GLOB_RECURSE SOURCES "../src/*.cpp" "../src/*.h" "../lib/*.cpp")
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h" "lib/*.cpp")
 set(LIBS glfw GLEW::GLEW)
 
 # Create executable
@@ -51,3 +51,10 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 target_link_libraries(ZephyrGL ${LIBS})
+
+# Test build
+option(BUILD_TESTING "Enable testing" OFF)
+if (BUILD_TESTING)
+    enable_testing()
+    add_subdirectory("tests")
+endif()
