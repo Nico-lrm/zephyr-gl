@@ -16,26 +16,11 @@ struct FakeGraphicsDevice
     const double vram_usage{ TEST_VRAM_USAGE };
     Extent2D extent{ TEST_WIDTH, TEST_HEIGHT };
 
-    void begin_frame()
-    {
-        actual_frame_state = FrameState::RECORDING;
-    }
-    void end_frame()
-    {
-        actual_frame_state = FrameState::END_RECORD;
-    }
-    void submit()
-    {
-        actual_frame_state = FrameState::SUBMITTED;
-    }
-    void present()
-    {
-        actual_frame_state = FrameState::READY;
-    }
-    void wait_idle() const
-    {
-        idle = true;
-    }
+    void begin_frame() { actual_frame_state = FrameState::RECORDING; }
+    void end_frame() { actual_frame_state = FrameState::END_RECORD; }
+    void submit() { actual_frame_state = FrameState::SUBMITTED; }
+    void present() { actual_frame_state = FrameState::READY; }
+    void wait_idle() const { idle = true; }
     void resize_swapchain(const std::optional<Extent2D> extent)
     {
         if(extent.has_value())

@@ -20,9 +20,11 @@ namespace zephyr
         READY
     };
 
-    inline std::ostream& operator<<(std::ostream& os, const FrameState& state) {
+    inline std::ostream& operator<<(std::ostream& os, const FrameState& state)
+    {
         std::string state_str;
-        switch (state) {
+        switch(state)
+        {
         case FrameState::RECORDING:
             state_str = "RECORDING";
             break;

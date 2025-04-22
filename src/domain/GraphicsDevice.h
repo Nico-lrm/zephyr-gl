@@ -23,7 +23,6 @@ namespace zephyr
     class GraphicsDevice
     {
       public:
-
         template<typename T>
             requires GraphicsDeviceConcept<T>
         explicit GraphicsDevice(std::shared_ptr<T> obj_ptr)
@@ -36,8 +35,8 @@ namespace zephyr
         void present() const { concept_->present(); }
         void wait_idle() const { concept_->wait_idle(); }
         void resize_swapchain(const std::optional<Extent2D> extent) const { concept_->resize_swapchain(extent); }
-        [[nodiscard]] double get_VRAM_usage() const noexcept{ return concept_->get_VRAM_usage(); };
-        [[nodiscard]] FrameState get_frame_state() const noexcept{ return concept_->get_frame_state(); };
+        [[nodiscard]] double get_VRAM_usage() const noexcept { return concept_->get_VRAM_usage(); };
+        [[nodiscard]] FrameState get_frame_state() const noexcept { return concept_->get_frame_state(); };
 
       private:
         struct IGraphicsDevice
@@ -71,9 +70,15 @@ namespace zephyr
             void submit() override { object_ptr_->submit(); }
             void present() override { object_ptr_->present(); }
             void wait_idle() const override { object_ptr_->wait_idle(); }
-            void resize_swapchain(const std::optional<Extent2D> extent) override { object_ptr_->resize_swapchain(extent); }
-            [[nodiscard]] double get_VRAM_usage() const noexcept override{ return object_ptr_->get_VRAM_usage(); };
-            [[nodiscard]] FrameState get_frame_state() const noexcept override { return object_ptr_->get_frame_state(); };
+            void resize_swapchain(const std::optional<Extent2D> extent) override
+            {
+                object_ptr_->resize_swapchain(extent);
+            }
+            [[nodiscard]] double get_VRAM_usage() const noexcept override { return object_ptr_->get_VRAM_usage(); };
+            [[nodiscard]] FrameState get_frame_state() const noexcept override
+            {
+                return object_ptr_->get_frame_state();
+            };
 
             std::shared_ptr<T> object_ptr_;
         };
