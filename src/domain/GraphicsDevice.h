@@ -17,6 +17,7 @@ namespace zephyr
         { t.wait_idle() } -> std::same_as<void>;
         { t.resize_swapchain(extent) } -> std::same_as<void>;
         { t.get_VRAM_usage() } -> std::convertible_to<double>;
+        { t.get_frame_state() } -> std::convertible_to<FrameState>;
     };
 
     class GraphicsDevice
@@ -36,6 +37,7 @@ namespace zephyr
         void wait_idle() const { concept_->wait_idle(); }
         void resize_swapchain(const std::optional<Extent2D> extent) const { concept_->resize_swapchain(extent); }
         [[nodiscard]] double get_VRAM_usage() const noexcept{ return concept_->get_VRAM_usage(); };
+        [[nodiscard]] FrameState get_frame_state() const noexcept{ return concept_->get_frame_state(); };
 
       private:
         struct IGraphicsDevice
@@ -54,6 +56,7 @@ namespace zephyr
 
             // Utility
             [[nodiscard]] virtual double get_VRAM_usage() const noexcept = 0;
+            [[nodiscard]] virtual FrameState get_frame_state() const noexcept = 0;
 
             // Creator
             // Des trucs pour créer Pipeline, Shader, Buffer, Texture, CommandList...
@@ -70,6 +73,7 @@ namespace zephyr
             void wait_idle() const override { object_ptr_->wait_idle(); }
             void resize_swapchain(const std::optional<Extent2D> extent) override { object_ptr_->resize_swapchain(extent); }
             [[nodiscard]] double get_VRAM_usage() const noexcept override{ return object_ptr_->get_VRAM_usage(); };
+            [[nodiscard]] FrameState get_frame_state() const noexcept override { return object_ptr_->get_frame_state(); };
 
             std::shared_ptr<T> object_ptr_;
         };
