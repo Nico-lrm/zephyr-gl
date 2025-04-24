@@ -6,10 +6,24 @@ namespace zephyr
 {
     static constexpr std::string_view APP_NAME = "ZephyrEngine";
 
+    struct Offset2D
+    {
+        int x_{ 0 };
+        int y_{ 0 };
+    };
+
     struct Extent2D
     {
-        int width_ = 0;
-        int height_ = 0;
+        int width_{ 0 };
+        int height_{ 0 };
+    };
+
+    struct Viewport
+    {
+        Offset2D offset{};
+        Extent2D extent{};
+        float near{ 0.01f };
+        float far{ 3000.f };
     };
 
     enum class FrameState
