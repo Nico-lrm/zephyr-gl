@@ -32,8 +32,7 @@ namespace zephyr
             virtual void swap_buffers() const = 0;
         };
 
-        template<typename T>
-        struct ConcreteOpenGLWindow final : IOpenGLWindow
+        template<typename T> struct ConcreteOpenGLWindow final : IOpenGLWindow
         {
             explicit ConcreteOpenGLWindow(std::shared_ptr<T> obj_ptr) noexcept : object_ptr_(obj_ptr) {}
             void swap_buffers() const override { object_ptr_->swap_buffers(); }
