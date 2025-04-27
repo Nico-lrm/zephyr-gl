@@ -8,17 +8,20 @@
 
 namespace zephyr
 {
+    class Window;
+
     template<typename T>
-    concept GraphicsDeviceConcept = requires(T t, std::optional<Extent2D> extent) {
-        { t.begin_frame() } -> std::same_as<void>;
-        { t.end_frame() } -> std::same_as<void>;
-        { t.submit() } -> std::same_as<void>;
-        { t.present() } -> std::same_as<void>;
-        { t.wait_idle() } -> std::same_as<void>;
-        { t.resize_swapchain(extent) } -> std::same_as<void>;
-        { t.get_VRAM_usage() } -> std::convertible_to<double>;
-        { t.get_frame_state() } -> std::convertible_to<FrameState>;
-    };
+    concept GraphicsDeviceConcept =
+        std::constructible_from<T, const Window*> && requires(T t, std::optional<Extent2D> extent) {
+            { t.begin_frame() } -> std::same_as<void>;
+            { t.end_frame() } -> std::same_as<void>;
+            { t.submit() } -> std::same_as<void>;
+            { t.present() } -> std::same_as<void>;
+            { t.wait_idle() } -> std::same_as<void>;
+            { t.resize_swapchain(extent) } -> std::same_as<void>;
+            { t.get_VRAM_usage() } -> std::convertible_to<double>;
+            { t.get_frame_state() } -> std::convertible_to<FrameState>;
+        };
 
     class GraphicsDevice
     {
@@ -61,7 +64,8 @@ namespace zephyr
             // Des trucs pour créer Pipeline, Shader, Buffer, Texture, CommandList...
         };
 
-        template<typename T> struct ConcreteGraphicsDevice final : IGraphicsDevice
+        template<typename T>
+        struct ConcreteGraphicsDevice final : IGraphicsDevice
         {
             explicit ConcreteGraphicsDevice(std::shared_ptr<T> obj_ptr) noexcept : object_ptr_(obj_ptr) {}
             void begin_frame() override { object_ptr_->begin_frame(); }

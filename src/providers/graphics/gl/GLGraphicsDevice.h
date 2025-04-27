@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../../../domain/GraphicsDevice.h"
 #include "../../windows/OpenGLWindow.h"
+
+#include <optional>
 
 namespace zephyr
 {
