@@ -64,8 +64,7 @@ namespace zephyr
             // Des trucs pour créer Pipeline, Shader, Buffer, Texture, CommandList...
         };
 
-        template<typename T>
-        struct ConcreteGraphicsDevice final : IGraphicsDevice
+        template<typename T> struct ConcreteGraphicsDevice final : IGraphicsDevice
         {
             explicit ConcreteGraphicsDevice(std::shared_ptr<T> obj_ptr) noexcept : object_ptr_(obj_ptr) {}
             void begin_frame() override { object_ptr_->begin_frame(); }

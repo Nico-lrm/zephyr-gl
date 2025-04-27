@@ -22,7 +22,8 @@ struct FakeWindow
 
 struct FakeGraphicsDevice
 {
-    explicit FakeGraphicsDevice(const Window* window) {};
+    explicit FakeGraphicsDevice(const Window* window)
+    {};
 
     FrameState actual_frame_state = FrameState::READY;
     bool process_called = false;
