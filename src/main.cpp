@@ -1,21 +1,44 @@
-#include "domain/GraphicsDevice.h"
-#include "domain/Window.h"
-#include "providers/graphics/gl/GLGraphicsDevice.h"
-#include "providers/windows/GLFWOpenGLWindow.h"
+#include "controllers/Application.h"
+
+#include <iostream>
 
 using namespace zephyr;
 
-int main()
+int main(int argc, char** argv)
 {
-    std::unique_ptr<Window> window = std::make_unique<OpenGLWindow>(std::make_shared<GLFWOpenGLWindow>());
-    auto graphics_device = std::make_unique<GraphicsDevice>(std::make_shared<GLGraphicsDevice>(window.get()));
-    while(!window->should_close())
+    if(argc != 3)
     {
-        window->process_events();
-        graphics_device->present();
+        std::cerr << "Usage: " << argv[0] << " <window type> <render API>" << std::endl;
+        return 1;
     }
-    graphics_device.reset(nullptr);
-    window.reset(nullptr);
+
+    WindowType window_type;
+    RenderAPI render_api;
+
+    if(std::string_view{ argv[1] } == "glfw")
+        window_type = WindowType::GLFW;
+    else if(std::string_view{ argv[1] } == "sdl")
+        window_type = WindowType::SDL;
+    else
+        throw std::invalid_argument("Invalid window type");
+
+    if(std::string_view{ argv[2] } == "opengl")
+        render_api = RenderAPI::OpenGL;
+    else if(std::string_view{ argv[2] } == "vulkan")
+        render_api = RenderAPI::Vulkan;
+    else
+        throw std::invalid_argument("Invalid render API");
+
+    try
+    {
+        const auto& app = Application::get_instance(window_type, render_api);
+        app.run();
+    }
+    catch(std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
 
     return 0;
 }
