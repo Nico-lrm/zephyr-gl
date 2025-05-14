@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../graphics/Types.h"
-
 namespace zephyr
 {
+
+    class Texture
+    {};
 
 } // namespace zephyr

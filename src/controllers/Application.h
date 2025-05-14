@@ -7,18 +7,6 @@
 
 namespace zephyr
 {
-    enum class WindowType
-    {
-        GLFW,
-        SDL,
-    };
-
-    enum class RenderAPI
-    {
-        OpenGL,
-        Vulkan,
-    };
-
     class Application
     {
       public:
@@ -29,10 +17,10 @@ namespace zephyr
         Application& operator=(const Application&) = delete;
 
         void run() const;
-        static Application& get_instance(WindowType window_type, RenderAPI render_api);
+        static Application& get_instance();
 
       private:
-        Application(WindowType window_type, RenderAPI render_api);
+        Application();
 
         std::unique_ptr<Window> window_;
         std::unique_ptr<GraphicsDevice> graphics_device_;

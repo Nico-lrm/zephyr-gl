@@ -11,7 +11,6 @@ if (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
 endif ()
 
-
 # Optimisations depending build type
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
@@ -34,10 +33,11 @@ endif ()
 # Find required packages
 find_package(GLEW REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
 
 # Variables
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h" "lib/*.cpp")
-set(LIBS glfw GLEW::GLEW)
+set(LIBS glfw GLEW::GLEW glm)
 
 # For OpenGL compilation
 find_package(OpenGL REQUIRED)
@@ -57,10 +57,3 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif ()
 
 target_link_libraries(ZephyrGL ${LIBS})
-
-# Test build
-option(BUILD_TESTING "Enable testing" OFF)
-if (BUILD_TESTING)
-    enable_testing()
-    add_subdirectory("tests")
-endif ()

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../graphics/Types.h"
-
 namespace zephyr
 {
+    class InputDispatcher
+    {};
 
 } // namespace zephyr

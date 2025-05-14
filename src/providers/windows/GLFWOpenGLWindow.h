@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../domain/Types.h"
+#include "../../graphics/Types.h"
 
 #include <GLFW/glfw3.h>
 
