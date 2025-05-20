@@ -1,4 +1,4 @@
-#include "RessourceManager.h"
+#include "ResourceManager.h"
 
 namespace zephyr {
 } // zephyr

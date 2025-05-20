@@ -4,6 +4,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "build")
 set(OpenGL_GL_PREFERENCE GLVND)
+if(WIN32)
+    set(VCPKG_TARGET_TRIPLET "x64-mingw-dynamic")
+    set(VCPKG_HOST_TRIPLET "x64-mingw-dynamic")
+endif()
 project(ZephyrGL LANGUAGES CXX VERSION 0.1.0)
 
 # Disable console on Windows
@@ -37,7 +41,7 @@ find_package(glm CONFIG REQUIRED)
 
 # Variables
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h" "lib/*.cpp")
-set(LIBS glfw GLEW::GLEW glm)
+set(LIBS glfw GLEW::GLEW glm::glm)
 
 # For OpenGL compilation
 find_package(OpenGL REQUIRED)

@@ -35,6 +35,7 @@ namespace zephyr
 
     class Framebuffer : public GLObject<GLuint>
     {
+        friend class GraphicsDevice;
       public:
         ~Framebuffer() noexcept;
         Framebuffer(Framebuffer&& old) noexcept;
@@ -45,11 +46,10 @@ namespace zephyr
         [[nodiscard]] const FramebufferCreateInfo& get_attachments_infos() const noexcept;
 
       private:
-        explicit Framebuffer(const FramebufferCreateInfo& framebuffer_create_info);
-        Framebuffer();
-        FramebufferCreateInfo create_info;
-        std::vector<GLenum> attachments;
-        std::vector<std::shared_ptr<Image>> images;
+        Framebuffer(const FramebufferCreateInfo& framebuffer_create_info, GLuint handle, std::vector<std::shared_ptr<Image>> images, std::vector<GLenum> attachments);
+        FramebufferCreateInfo create_info_;
+        std::vector<GLenum> attachments_;
+        std::vector<std::shared_ptr<Image>> images_;
     };
 
     struct FramebufferBlitInfo

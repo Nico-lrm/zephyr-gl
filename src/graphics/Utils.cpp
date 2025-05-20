@@ -4,7 +4,7 @@
 
 namespace zephyr
 {
-        void opengl_message_callback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+    void opengl_message_callback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
     {
         std::string sourceName;
         std::string typeName;
@@ -34,24 +34,25 @@ namespace zephyr
                 break;
         }
 
-        switch (severity) {
-            case 0x9146:
-                severityName = "GL_DEBUG_SEVERITY_HIGH_AMD";
-                break;
-            case 0x9147:
-                severityName = "GL_DEBUG_SEVERITY_MEDIUM_AMD";
-                break;
-            case 0x9148:
-                severityName = "GL_DEBUG_SEVERITY_LOW_AMD";
-                break;
-            case 0x826b:
-                severityName = "GL_DEBUG_SEVERITY_NOTIFICATION";
-                break;
-            default:
-                sourceName = "GL_DEBUG_SEVERITY_UNKNOWN";
-                break;
+        switch(severity)
+        {
+        case 0x9146:
+            severityName = "GL_DEBUG_SEVERITY_HIGH_AMD";
+            break;
+        case 0x9147:
+            severityName = "GL_DEBUG_SEVERITY_MEDIUM_AMD";
+            break;
+        case 0x9148:
+            severityName = "GL_DEBUG_SEVERITY_LOW_AMD";
+            break;
+        case 0x826b:
+            severityName = "GL_DEBUG_SEVERITY_NOTIFICATION";
+            break;
+        default:
+            sourceName = "GL_DEBUG_SEVERITY_UNKNOWN";
+            break;
         }
-        std::string finalString = "source : " + sourceName + "\ntype : " + typeName + "\nseverity : " + severityName + "\nmessage : " + message;
+        const std::string finalString = "source : " + sourceName + "\ntype : " + typeName + "\nseverity : " + severityName + "\nmessage : " + message;
         std::cout << finalString << "\n";
         //throw std::runtime_error(finalString.c_str());
     }

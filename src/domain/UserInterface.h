@@ -1,16 +1,12 @@
-//
-// Created by nico on 11/05/25.
-//
+#pragma once
 
-#ifndef USERINTERFACE_H
-#define USERINTERFACE_H
+namespace zephyr
+{
 
-namespace zephyr {
+    class UserInterface
+    {
+      public:
+      private:
+    };
 
-class UserInterface {
-
-};
-
-} // zephyr
-
-#endif //USERINTERFACE_H
+} // namespace zephyr

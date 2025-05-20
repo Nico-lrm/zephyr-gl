@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../domain/GraphicsDevice.h"
+#include "../domain/Renderer.h"
+#include "../domain/ResourceManager.h"
 #include "../domain/Window.h"
 
 #include <memory>
@@ -22,7 +24,9 @@ namespace zephyr
       private:
         Application();
 
-        std::unique_ptr<Window> window_;
-        std::unique_ptr<GraphicsDevice> graphics_device_;
+        std::shared_ptr<Window> window_;
+        std::shared_ptr<GraphicsDevice> graphics_device_;
+        std::shared_ptr<ResourceManager> resource_manager_;
+        std::shared_ptr<Renderer> renderer_;
     };
 } // namespace zephyr
